@@ -45,6 +45,8 @@ public:
       std::placeholders::_1));
     // init
     tof_->Init(false);
+    // open
+    tof_->Open();
     // start tof
     tof_->Start();
   }
