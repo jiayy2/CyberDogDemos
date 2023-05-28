@@ -115,12 +115,12 @@ candump是一个用于读取CAN总线数据的工具，常用于调试和分析C
 
 以下是机器狗使用candump的基本步骤：
 
-~~~JSON
+```
 1. ssh登陆机器狗:ssh xiaomi@192.168.55.1 密码:123。
 2. 打开终端，输入以下命令启动candump：
-   ```
+   
    candump can0
-   ```
+
    其中can0是CAN接口的名称，目前机器狗有两路,can0和can1。
    具体数据使用的哪一路can可根据toml文件can_interface
 3. 当CAN总线上有数据传输时，candump会将数据打印到终端上，例如：
@@ -130,33 +130,33 @@ candump是一个用于读取CAN总线数据的工具，常用于调试和分析C
    ```
    其中can0表示数据来自CAN接口的名称，123和456表示CAN帧的标识符，[1]和[8]表示数据长度，11、12、34等表示具体的数据内容。
 4. 按Ctrl+C键可以停止candump的运行。
-~~~
+```
 
 #### cansend工具
 
 cansend是一个用于向CAN总线发送数据的工具，常用于测试和调试CAN总线。
 
-~~~JSON
+```
 以下是使用cansend的基本步骤：
 1. ssh登陆机器狗:ssh xiaomi@192.168.55.1 密码:123。
 2. 打开终端，输入以下命令发送CAN数据：
-   ```
+   
    cansend can0 123#11223344
-   ```
+
    其中can0是CAN接口的名称，123是CAN帧的标识符，#后面的内容是数据内容。11223344表示4个    字节的数据，可以根据需要进行修改。
 3. 如果需要发送更多的数据，可以使用以下命令：
-   ```
+
    cansend can0 123#11223344 456#AABBCCDD
-   ```
+
    其中456是另一个CAN帧的标识符，#后面的内容是数据内容。
 4. 按Ctrl+C键可以停止cansend的运行。
-~~~
+```
 
 ##  Protocol协议介绍(以TOF为例)
 
 ![img](./images/tof_protocol.png)
 
-![img](./images/tof_toml.png)
+![img](./images/tof_msg.png)
 
 - 源码路径：`bridges/protocol/ros`
 
