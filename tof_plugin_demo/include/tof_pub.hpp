@@ -53,15 +53,21 @@ private:
 
   void SingleTofPayloadCallback(std::shared_ptr<protocol::msg::SingleTofPayload> msg)
   {
-    RCLCPP_INFO(this->get_logger(), "get msg frame:[%s]",msg->header.frame_id);
     count_++;
-    if(count_ >= 20) {
-      // stop tof
-      RCLCPP_INFO(this->get_logger(), "stop tof");
-      tof_->Stop();
-      // shutdown;
-      rclcpp::shutdown();
+    if((count_ % 40) == 0)
+    {
+      RCLCPP_INFO(this->get_logger(), "get msg frame:[%s]",msg->header.frame_id.c_str());
     }
+
+    tof_pub_->publish(*msg);
+    
+    // if(count_ >= 20) {
+    //   // stop tof
+    //   RCLCPP_INFO(this->get_logger(), "stop tof");
+    //   // tof_->Stop();
+    //   // shutdown;
+    //   rclcpp::shutdown();
+    // }
   }
 
   rclcpp::CallbackGroup::SharedPtr group_;
